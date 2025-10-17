@@ -1,9 +1,8 @@
 # Phantom Fortress
 
-**Made for Mini-LD 49 (2014)**
-
-This project is no longer maintained here.
-It has been moved to: https://github.com/morph-games/phantom-fortress
+## History 
+ 
+Originally made for the Ludum Dare Mini-LD #49 competition in 2014.
 
 Original Mini-LD entry page: https://web.archive.org/web/20141212152809/http://ludumdare.com/compo/minild-49/?action=preview&uid=17861
 
