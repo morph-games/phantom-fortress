@@ -1,6 +1,21 @@
 # Phantom Fortress
 
-## History 
+## Play
+
+Play latest dev version: https://morph-games.github.io/phantom-fortress/
+
+### Tips
+
+- The Phantom Lord is immortal and will be reborn if he dies
+- Rooms produce gold/souls/arcane or harvest stone/ore/gold when they have goons working in them
+- When you build up or down, you begin with a room that produces nothing; try remodeling for a better room type
+- Tap on corpses and skulls to harvest souls and loot gold
+- Always keep your floors filled with goons working
+- A mine with no natural resources left will harvest stone
+- Arcane knowledge increases the health and power of the Phantom Lord
+
+
+## History
  
 Originally made for the Ludum Dare Mini-LD #49 competition in 2014.
 
