@@ -41,7 +41,7 @@ var PFGameClass = function ()
 		,"groups"	: {}
 		*/
 	};
-	this.version = "0.56";
+	this.version = "1.0.0-alpha.1";
 	//==== Game Data
 	this.game = {
 		"floorKeyCounter" : 0
