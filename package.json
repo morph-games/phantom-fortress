@@ -2,7 +2,7 @@
   "name": "phantom-fortress",
   "version": "1.0.0",
   "description": "A web game where you build a fortress and fend off invaders",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "serve": "vite",
     "preview": "vite preview",

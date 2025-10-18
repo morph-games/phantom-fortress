@@ -201,6 +201,12 @@ footer a {
 	background-color: /* #225 */ rgba(34,34,85,0.95);
 	color: white;
 }
+
+.popUpFull {
+	position: fixed;
+	top: 64px;
+}
+
 .popUp:after {
 	position: fixed;
 	top: 0; left: 0;
@@ -711,47 +717,7 @@ li.viewAssignWorker:hover {
 	opacity: 0.5;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/* Helpers */
-
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-.clearfix {
-    *zoom: 1;
-}
-
-
 /* === Media Queries for RESPONSIVE === */
-
-@media only screen and (max-height : 30em) {
-
-}
-
-@media only screen and (max-width : 1000px) {
-
-
-	
-}
-
 
 @media only screen and (max-width : 880px) {
 	#currency {
@@ -775,10 +741,5 @@ li.viewAssignWorker:hover {
 	#currency .currNum {	font-size: 16px;  }
 	header h1 {	font-size: 40px; margin-top: 1em; }
 	/* #floors {	top: 150px; } */
-}
-
-@media only screen and (max-width : 400px) {
-
-
 }
 

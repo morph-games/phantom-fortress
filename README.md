@@ -17,7 +17,7 @@ Play latest dev version: https://morph-games.github.io/phantom-fortress/
 
 ## History
  
-Originally made for the Ludum Dare Mini-LD #49 competition in 2014.
+Originally made in 48 hours for the Ludum Dare Mini-LD #49 competition in 2014.
 
 Original Mini-LD entry page: https://web.archive.org/web/20141212152809/http://ludumdare.com/compo/minild-49/?action=preview&uid=17861
 
