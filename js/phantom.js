@@ -34,7 +34,7 @@ function PFGameClass() {
 		,"groups": {}
 		*/
 	};
-	this.version = "1.0.0-alpha.1";
+	this.version = "1.0.0-beta.1";
 	// ==== Game Data
 	this.game = {
 		"floorKeyCounter" : 0,
@@ -399,7 +399,7 @@ function PFGameClass() {
 
 	//= ======= Pop-up Menus / Floor Controls ====================================\\
 
-	this.viewFloor = function (floorKey, top, left) {
+	this.viewFloor = function viewFloor(floorKey, x, y) {
 		var floorObj = this.game.floors[floorKey];
 		var floorTypeObj = this.data.floors[floorObj.floorTypeId];
 		var $floorAvailability = this.$floorMenu.find('.floorAvailability').hide();
@@ -458,10 +458,11 @@ function PFGameClass() {
 			nrHtml += '<li>' + floorObj.naturalResources[n] + ' ' + n + '</li>';
 		}
 		$floorNR.children('ul').html(nrHtml || '<li>None</li>');
-		this.$floorMenu.css({ "top" : top, "left" : left }).slideDown(200);
+		const left = Math.min(document.body.offsetWidth / 2, x);
+		this.$floorMenu.css({ top: y, left }).slideDown(200);
 	}
 
-	this.viewFloorPurchase = function (top) {
+	this.viewFloorPurchase = function viewFloorPurchase() {
 		const o = this;
 		var floorKey = o.selectedFloorKey;
 		if (floorKey === "F0") {
@@ -514,7 +515,7 @@ function PFGameClass() {
 		// h += '<button type="button" class="closePopUp">X</button>';
 		// this.$floorPurchase.find("ul").html(h);
 		o.$floorPurchase
-			.css({ "left": 0, "top": top, "opacity": 1 })
+			.css({ "left": 0, "opacity": 1 })
 			.fadeIn(100);
 	}
 
@@ -665,7 +666,7 @@ function PFGameClass() {
 		this.$goonInfo.slideDown(200);
 	}
 
-	this.viewGoonAssignment = function (floorKeyParam, top) {
+	this.viewGoonAssignment = function (floorKeyParam) {
 		const floorKey = floorKeyParam || this.selectedFloorKey;
 		console.log("View goons to assign to " + floorKey);
 		var h = ""
@@ -678,7 +679,7 @@ function PFGameClass() {
 					+ ' data-goontypeid="' + goonId + '" '
 					+ '>'
 					+ '<span class="goonName">' + goonType.name + '</span>';
-				// console.log(goonType);	
+				// console.log(goonType);
 				h += this.getCurrencyHtml(goonType.cost);
 				h += '</li>';
 			}
@@ -686,7 +687,7 @@ function PFGameClass() {
 		// *** List additional unassigned goons
 		// *** List working goons that can be re-assigned
 		this.$goonAssign.find('ul').html(h);
-		this.$goonAssign.css({ "top" : top }).slideDown(200);
+		this.$goonAssign.slideDown(200);
 	}
 
 	this.isRoomForWorkers = function (floorKey) {
@@ -1412,59 +1413,53 @@ function PFGameClass() {
 			$('footer').fadeOut();
 		}
 		
-		var clickFloor = function ($floor) {
-			var floorKey = $floor.data("floorkey");
+		function clickFloor(floorElt, event) {
+			const floorKey = floorElt.dataset.floorkey;
 			o.selectFloor(floorKey);
-			// var top = o.$body.scrollTop();
-			var top = $floor.offset().top;
-			o.viewFloor(floorKey, top, 0);
+			o.viewFloor(floorKey, event.pageX, event.pageY);
 		}
 		
 		o.$body.on("click", function (e) {
 			var $target = $(e.target);
 			console.log($target);
+			const floorElt = e.target.closest('.floor');
 			if ($target.hasClass("viewFloor")) {
-				clickFloor($target);
+				clickFloor(floorElt, e);
 			} else if ($target.hasClass("floorTop")) {
-				const top = $target.offset().top;
-				const left = $target.offset().left;
-				o.viewBuilder(true, top, left);
+				o.viewBuilder(true, e.pageY, e.pageX);
 			} else if ($target.hasClass("floorBottom")) {
-				const top = $target.offset().top;
-				const left = $target.offset().left;
-				o.viewBuilder(false, top, left);
+				o.viewBuilder(false, e.pageY, e.pageX);
 			} else if ($target.hasClass("goon")) {
 				if ($target.hasClass("dead")) {
 					var goonKey = $target.data("goonkey");
 					o.lootCorpse(goonKey, true);
 				} else {
-					clickFloor($target.closest('.floor'));
+					clickFloor(floorElt, e);
 				}
 			} else if ($target.hasClass("invader")) {
 				if ($target.hasClass("dead")) {
 					var invaderKey = $target.data("invaderkey");
 					o.lootCorpse(invaderKey, false);
 				} else {
-					clickFloor($target.closest('.floor'));
+					clickFloor(floorElt, e);
 				}
 			} else if ($target.hasClass("floorName")) {
-				clickFloor($target.closest('.floor'));
+				clickFloor(floorElt, e);
 			} else if ($target.hasClass("viewAssignWorker")) {
 				const floorKey = $target.data("floorkey");
 				closePopUp($target.closest('.popUp'));
 				// const top = $target.offset().top;
-				const top = o.$body.scrollTop();
-				o.viewGoonAssignment(floorKey, top);
-			} else if ($target.hasClass("buyGoon")) {
-				const floorKey = $target.data("floorkey");
-				const goonTypeId = $target.data("goontypeid");
+				// const top = o.$body.scrollTop();
+				o.viewGoonAssignment(floorKey);
+			} else if ($target.hasClass("buyGoon") || e.target.closest('.buyGoon')) {
+				const buyGoonElt = e.target.closest('.buyGoon');
+				const floorKey = buyGoonElt.dataset.floorkey;
+				const goonTypeId = buyGoonElt.dataset.goontypeid;
 				o.buyGoon(goonTypeId, floorKey);
 			} else if ($target.hasClass("floorPurchase")) {
 				closePopUp($target.closest('.popUp'));
 				var top = o.$body.scrollTop();
 				o.viewFloorPurchase(top);
-			} else if ($target.hasClass("toggleFloorDescription")) {
-				$target.closest('.popUp').find('.descriptiveInfo').toggle(400);
 			} else if ($target.hasClass("zoomOut")) { // Settings
 				o.zoomOut();
 			} else if ($target.hasClass("zoomIn")) {
@@ -1489,9 +1484,9 @@ function PFGameClass() {
 		$('.toggleWorkerInfo').click(function () {
 			$('.workerInfo').toggle(200);
 		});
-		$('.toggleProductionInfo').click(function () {
-			$('.productionInfo').toggle(200);
-		});
+		// $('.toggleProductionInfo').click(function () {
+		// 	$('.productionInfo').toggle(200);
+		// });
 		
 		/*
 		$('.save').click(function(e){

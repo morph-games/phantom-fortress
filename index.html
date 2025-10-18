@@ -10,7 +10,6 @@
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> -->
 </head>
 <body>
-
 	<header>
 		<h1>Phantom Fortress</h1>
 		<div class="subTitle"></div>
@@ -66,19 +65,15 @@
 	</section>
 	
 	<section id="floorMenu" class="floorSizeMenu popUp">		
-		
-		<button type="button" class="buttonAddWorker viewAssignWorker buttonImportant">Add Goon...</button>
+		<h1 class="floorName"><!--- Floor name ---></h1>
+		<div class="floorDescription"><!--- Floor description ---></div>
 		<button type="button" class="buttonRebuild floorPurchase buttonImportant">Remodel...</button>
-		<button type="button" class="buttonProduction toggleProductionInfo">Production</button>
+		<button type="button" class="buttonAddWorker viewAssignWorker buttonImportant">Add Goon...</button>
+		<!-- <button type="button" class="buttonProduction toggleProductionInfo">Production</button> -->
 		<button type="button" class="buttonWorker toggleWorkerInfo">
 			<span class="workerCount"></span> Goons
 		</button>
-		<button type="button" class="buttonInfo toggleFloorDescription">Info</button>
-		
-		<div class="descriptiveInfo">
-			<h1 class="floorName"><!--- Floor name ---></h1>
-			<div class="floorDescription"><!--- Floor description ---></div>
-		</div>
+		<!-- <button type="button" class="buttonInfo toggleFloorDescription">Info</button> -->
 		
 		<div class="productionInfo">
 			<div class="naturalResources">
@@ -101,13 +96,15 @@
 					<!--- List of Workers --->
 				</ul>
 			</div>
+			<!--
 			<button type="button" class="buttonRemoveWorker NA">Banish Workers</button>
 			<button type="button" class="buttonCandleOn NA">Shut Down</button>			
+			-->
 		</div>
 		<button type="button" class="popUpX closePopUp">X</button>
 	</section>
 
-	<section id="goonAssign" class="popUp">
+	<section id="goonAssign" class="popUp popUpFull">
 		<h1>Assign a Goon to the Floor</h1>
 		<ul class="blockList">
 			<!--- Goon name, description, price --->
@@ -123,7 +120,7 @@
 		<button type="button" class="popUpX closePopUp">X</button>
 	</section>
 
-	<section id="settings" class="popUp">
+	<section id="settings" class="popUp popUpFull">
 		<h1>Zoom</h1>
 		<button type="button" class="zoomOut">Zoom Out</button>
 		<button type="button" class="zoomIn">Zoom In</button>
